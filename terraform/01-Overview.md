@@ -68,7 +68,7 @@ Terraform 자체는 인프라가 구축되는 환경(AWS, GCP, Azur 등)에 맞�
 
 실제 디렉토리 구조를 예를 들어 보면 다음과 같습니다.
 
-```bash
+```hcl
 $ tree .
 .
 │   # create-subnet 모듈입니다.
@@ -99,7 +99,7 @@ $ terraform apply
 # ...
 ```
 
-```bash
+```hcl
 # 파일명 : ./main.tf
 # 다음과 같이 코드 내부에서 module block을  통해 모듈 간에 호출이 가능합니다.
 module {
@@ -116,7 +116,7 @@ Terraform으로 생성된 인프라 형상을 콘솔이나 API로 수정하게�
 
 그렇기 때문에 Terraform을 통해 인프라를 관리하는 조직에서는 `state` 파일을 어디에 저장하고 관리할 것인지에 대한 전략이 필수적입니다. 이를 위해 Terraform에서는 `state` 파일에 대한 관리 방안을 기본적으로 제공하고 있습니다. 다음의 코드는 AWS S3에 `state` 파일을 저장하거나 읽어오겠다는 것을 의미합니다.
 
-```bash
+```hcl
 terraform {
   backend "s3" {
     bucket         = "bucket-name"
@@ -143,7 +143,7 @@ Terraform에서는 Hashicorp에서 만든 HCL을 사용합니다. 가장 큰 특
 
 [https://www.digitalocean.com/community/tutorials/imperative-vs-declarative-kubernetes-management-a-digitalocean-comic](https://www.digitalocean.com/community/tutorials/imperative-vs-declarative-kubernetes-management-a-digitalocean-comic)
 
-```bash
+```hcl
 # 다음은 AWS의 VPC를 정의하는 표현입니다.
 resource "aws_vpc" "this" {
   cidr_block           = "10.0.0.0/16"
@@ -159,7 +159,7 @@ resource "aws_vpc" "this" {
 
 Terraform에서는 인프라를 정의하기 위해 많은 block들이 있습니다.
 
-```bash
+```hcl
 # Terraform에 대한 설정값들을 명시합니다.
 terraform {
 	# Contents
@@ -223,7 +223,7 @@ $ tree .
 
 Terraform의 다양한 block들은 resource block을 잘 작성하기 위해 존재합니다. Terraform의 주 목적인 리소스를 정의하기 때문입니다. resource  block은 다음과 같인 구조를 띄고 있습니다.
 
-```bash
+```hcl
 resource "<TYPE>" "<LOCAL_NAME>" {
 	# Contents
 }
@@ -242,7 +242,7 @@ resource "<TYPE>" "<LOCAL_NAME>" {
 
 Block의 결과값들은 동일 모듈안에서 참조될 수 있습니다. 예를 들어, AWS VPC와 Internet-gateway를 만들때 다음과 같이 block 간의 참조를 할 수 있습니다.
 
-```bash
+```hcl
 # 다음의 resource block에서 AWS VPC를 생성합니다.
 resource "aws_vpc" "this" {
   cidr_block           = "10.0.0.0/16"
@@ -266,7 +266,7 @@ resource "aws_internet_gateway" "this" {
 
 - locals block → `local.<ATTRIBUTE>`
 
-    ```bash
+    ```hcl
     # 주의할점은 locals block으로 표현하고 있으나 참조할때는 local을 써야한다.
     locals {
     	a_string = "this is a string"
@@ -295,7 +295,7 @@ AWS에 Terraform을 활용하기 위해서 AWS CLI와 Terrafom CLI 설치(다운
 
 다음과 같이 `default` 프로파일을 설정합니다.
 
-```bash
+```hcl
 $ aws configure
 
 AWS Access Key ID [None]:         # ACCESS KEY 입력
